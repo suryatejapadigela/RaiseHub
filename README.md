@@ -102,11 +102,11 @@ Raise Hub is a platform designed to facilitate funding for foundations and chari
 ## Contributors
 <ul>
          <li><a href="https://github.com/VenkatreddyPadala">Venkat Reddy Padala</a></li>
-         <li><a href="https://github.com/pranayreddyambati">Pranay Reddy Ambati</a></li>
+<!--          <li><a href="https://github.com/pranayreddyambati">Pranay Reddy Ambati</a></li>
          <li><a href="https://github.com/ordr-github">Deepak Reddy Obulareddy</a></li>
          <li><a href="https://github.com/revanth0514">Revanth Chowdary Garapati</a></li>
          <li><a href="https://github.com/print-keer">Keerthi Manoja</a></li>
-         <li><a href="https://github.com/Sravanthikurumoju">Sravanthi Vani</a></li>
+         <li><a href="https://github.com/Sravanthikurumoju">Sravanthi Vani</a></li> -->
       </ul>
 
 
