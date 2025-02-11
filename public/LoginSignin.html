@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Sans:wght@700&display=swap" rel="stylesheet">
+    <!-- font awesome icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- css stylesheet -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --linear-grad: linear-gradient(to right, #141E30, #243B55);
+    --grad-clr1: #141E30;
+    --grad-clr2: #243B55;
+}
+
+body {
+    height: 100vh;
+    background: #f6f5f7;
+    display: grid;
+    place-content: center;
+    font-family: 'Poppins', sans-serif;
+}
+
+.container {
+    position: relative;
+    width: 850px;
+    height: 500px;
+    background-color: #FFF;
+    box-shadow: 25px 30px 55px #5557;
+    border-radius: 13px;
+    overflow: hidden;
+}
+
+.form-container {
+    position: absolute;
+    width: 60%;
+    height: 100%;
+    padding: 0 40px;
+    transition: all 0.6s ease-in-out;
+}
+
+.sign-up-container {
+    opacity: 0;
+    z-index: 1;
+}
+
+.sign-in-container {
+    z-index: 2;
+}
+.sign-in-container button {
+    background-color: #1e2952;
+    border-color: #1e2952;
+    color: #fff; 
+}
+.sign-up-container button {
+    background-color: #1e2952; 
+    border-color: #1e2952; 
+    color: #fff;
+}
+form {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 50px;
+}
+
+h1 {
+    color: var(--grad-clr1);
+}
+
+.social-container {
+    margin: 20px 0;
+}
+
+.social-container a {
+    border: 1px solid #DDD;
+    border-radius: 50%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 5px;
+    height: 40px;
+    width: 40px;
+}
+
+span {
+    font-size: 12px;
+}
+
+.infield {
+    position: relative;
+    margin: 8px 0;
+    width: 100%;
+}
+
+input {
+    width: 100%;
+    padding: 12px 8px;
+    background-color: #f3f3f3;
+    border: none;
+    outline: none;
+}
+
+label {
+    position: absolute;
+    left: 50%;
+    top: 100%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background: var(--linear-grad);
+    transition: 0.3s;
+}
+
+input:focus ~ label {
+    width: 100%;
+}
+
+a {
+    color: #333;
+    font-size: 14px;
+    text-decoration: none;
+    margin: 15px 0;
+}
+
+a.forgot {
+    padding-bottom: 3px;
+    border-bottom: 2px solid #EEE;
+}
+
+button {
+    border-radius: 20px;
+    border: 1px solid var(--grad-clr2);
+    color: #FFF;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 12px 45px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.form-container button {
+    margin-top: 17px;
+    transition: 80ms ease-in;
+}
+
+.form-container button:hover {
+    background: #FFF;
+    color: var(--grad-clr1);
+}
+.Welcomeback{
+    padding: 10px;
+}
+.Hellofriend{
+    padding: 10px;
+}
+.overlay-container {
+    position: absolute;
+    top: 0;
+    left: 60%;
+    width: 40%;
+    height: 100%;
+    overflow: hidden;
+    transition: transform 0.6s ease-in-out;
+    z-index: 9;
+}
+
+#overlayBtn {
+    cursor: pointer;
+    position: absolute;
+    left: 50%;
+    top: 285px;
+    transform: translateX(-50%);
+    width: 143.67px;
+    height: 40px;
+    border: 1px solid #FFF;
+    background: transparent;
+    border-radius: 20px;
+}
+
+.overlay {
+    position: relative;
+    background: var(--linear-grad);
+    color: #FFF;
+    left: -150%;
+    height: 100%;
+    width: 250%;
+    transition: transform 0.6s ease-in-out;
+}
+
+.overlay-panel {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    height: 100%;
+    width: 340px;
+    transition: 0.6s ease-in-out;
+}
+
+.overlay-left {
+    right: 60%;
+    transform: translateX(-12%);
+}
+
+.overlay-right {
+    right: 0;
+    transform: translateX(0%);
+}
+
+.overlay-panel h1 {
+    font-family: "Bebas Neue", sans-serif;
+  font-weight: 700;
+  font-size: 55px;
+  font-style: normal;
+    color: #FFF;
+}
+
+p {
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 20px;
+    letter-spacing: 0.5px;
+    margin: 25px 0 35px;
+}
+
+.overlay-panel button {
+    border: none;
+    background-color: transparent;
+}
+
+.right-panel-active .overlay-container {
+    transform: translateX(-150%);
+}
+
+.right-panel-active .overlay {
+    transform: translateX(50%);
+}
+
+.right-panel-active .overlay-left {
+    transform: translateX(25%);
+}
+
+.right-panel-active .overlay-right {
+    transform: translateX(35%);
+}
+
+.right-panel-active .sign-in-container {
+    transform: translateX(20%);
+    opacity: 0;
+}
+
+.right-panel-active .sign-up-container {
+    transform: translateX(66.7%);
+    opacity: 1;
+    z-index: 5;
+    animation: show 0.6s;    
+}
+
+@keyframes show {
+    0%, 50% {
+        opacity: 0;
+        z-index: 1;
+    }
+    50.1%, 100% {
+        opacity: 1;
+        z-index: 5;
+    }
+}
+
+.btnScaled {
+    animation: scaleBtn 0.6s;
+}
+
+@keyframes scaleBtn {
+    0% {
+        width: 143.67px;
+    }
+    50% {
+        width: 250px;
+    }
+    100% {
+        width: 143.67px;
+    }
+}
+    
+    </style>
+</head>
+<body>
+    <div class="container" id="container">
+        <div class="form-container sign-up-container">
+            <form action="/signup" method="POST" id="registrationForm">
+                <h1>Create Account</h1>
+                <div class="infield">
+                    <input type="text" id="firstName" name="firstName" placeholder="First Name" required>
+                    <label></label>
+                </div>
+                <div class="infield">
+                    <input type="text" id="lastName" name="lastName" placeholder="Last Name" required>
+                    <label></label>
+                </div>
+                <div class="infield">
+                    <input type="tel" id="number" name="number" placeholder="Mobile Number" pattern="\d{10}" title="Mobile Number must have 10 Digits" required>
+                    <label></label>
+                </div>
+                <div class="infield">
+                    <input type="password" id="password" name="password" placeholder="Password" required>
+                    <label></label>
+                </div>
+                <div class="infield">
+                    <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" required>
+                    <label></label>
+                </div>
+                <div id="passwordError" style="color: red; font-size: 12px; margin-top: 10px;"></div>
+                <button>Sign Up</button>
+            </form>
+        </div>
+        <div class="form-container sign-in-container">
+            <form action="/login" method="POST">
+                <h1>Sign in</h1>
+                <div class="infield">
+                    <input type="tel" id="number" name="number" placeholder="Mobile" required>
+                    <label></label>
+                </div>
+                <div class="infield">
+                    <input type="password" id="password" name="password" placeholder="Password" required>
+                    <label></label>
+                </div>
+                <button>Sign In</button>
+            </form>
+        </div>
+        <div class="overlay-container" id="overlayCon">
+            <div class="overlay">
+                <div class="overlay-panel overlay-left">
+                    <h1>Raise-Hub</h1>
+                    <div class="Welcomeback"><p>Become a Fundraiser</p></div>
+                    <button>Sign In</button>
+                    <br>
+                    <button style="top: 30px;"><a href="/foundationRequest" style="color: white;">Foundation Registration</a></button>
+                
+                </div>
+                <div class="overlay-panel overlay-right">
+                    <h1>Raise-Hub</h1>
+                    <div class="Hellofriend"><p>Continue Funding Dreams</p></div>
+                    <button>Sign Up</button>
+                    <br>
+                    <button style="top: 30px;"><a href="/foundationRequest" style="color: white;">Foundation Registration</a></button>
+                </div>
+            </div>
+            <button id="overlayBtn"></button>
+        </div>
+    </div>
+    <script>
+        const container = document.getElementById('container');
+        const overlayCon = document.getElementById('overlayCon');
+        const overlayBtn = document.getElementById('overlayBtn');
+
+        overlayBtn.addEventListener('click', () => {
+            container.classList.toggle('right-panel-active');
+
+            overlayBtn.classList.remove('btnScaled');
+            window.requestAnimationFrame(() => {
+                overlayBtn.classList.add('btnScaled');
+            });
+        });
+
+        document.getElementById('registrationForm').addEventListener('submit', function(event) {
+            var password = document.getElementById('password').value;
+            var confirmPassword = document.getElementById('confirmPassword').value;
+            var phoneNumber = document.getElementById('number').value;
+            var phonePattern = /^\d{10}$/;
+            var passwordError = document.getElementById('passwordError');
+            
+            passwordError.textContent = ''; // Clear previous errors
+
+            if (!phonePattern.test(phoneNumber)) {
+                passwordError.textContent = 'Phone number must be 10 digits.';
+                event.preventDefault();
+            } else if (password !== confirmPassword) {
+                passwordError.textContent = 'Passwords do not match.';
+                event.preventDefault();
+            }
+        });
+    </script>
+</body>
+</html>

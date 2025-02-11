@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Foundation Request Form</title>
+    <style>
+      body {
+    font-family: Arial, sans-serif;
+    background-color: #f6f5f7;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    text-align: center;
+    color: #141E30;
+}
+
+form {
+    max-width: 500px;
+    margin: 20px auto;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.input-box {
+    margin-bottom: 20px;
+}
+
+.input-box label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 18px;
+    color: #243B55;
+}
+
+.input-box input[type="text"],
+.input-box textarea,
+.input-box input[type="number"] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+.input-box input[type="text"]:focus,
+.input-box textarea:focus,
+.input-box input[type="number"]:focus {
+    border-color: #243B55;
+    outline: none;
+}
+
+.input-box textarea {
+    height: 100px;
+    resize: vertical;
+}
+
+.input-box button {
+    padding: 12px 24px;
+    background-color: #243B55;
+    border: none;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 16px;
+}
+
+.input-box button:hover {
+    background-color: #141E30;
+}
+    </style>
+</head>
+<body>
+    <h1>Foundation Request Form</h1>
+    <form action="" method="POST">
+        <div class="input-box">
+            <label for="foundationName">Foundation Name</label>
+            <input type="text" id="foundationName" name="foundationName" required>
+        </div>
+
+        <div class="input-box">
+            <label for="cause">Cause</label>
+            <input type="text" id="cause" name="cause" required>
+        </div>
+
+        <div class="input-box">
+            <label for="description">Description</label>
+            <textarea id="description" name="description" required></textarea>
+        </div>
+
+        <div class="input-box">
+            <label for="location">Location</label>
+            <input type="text" id="location" name="location" required>
+        </div>
+
+        <div class="input-box">
+            <label for="contactDetails">Contact Details</label>
+            <input type="number" id="contactDetails" name="contactDetails" required>
+        </div>
+
+        <div class="input-box">
+            <button type="submit">Submit</button>
+        </div>
+    </form>
+</body>
+</html>
