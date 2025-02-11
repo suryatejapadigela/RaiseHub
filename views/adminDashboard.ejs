@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Sans:wght@700&display=swap"
+        rel="stylesheet">
+        <style>
+            /* Imported font */
+            @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+    
+            *{
+                margin: 0;
+                padding: 0;
+            }
+            
+            /* Root variables */
+            :root {
+                --linear-grad: linear-gradient(to right, #141E30, #243B55);
+                --grad-clr1: #141E30;
+                --grad-clr2: #243B55;
+                --background-color: #f6f5f7;
+                --sidebar-color: #243B55;
+                --sidebar-item-color: #FFF;
+                --sidebar-item-hover-color: #DDD;
+                --content-bg-color: #FFF;
+                --header-bg-color: var(--linear-grad);
+                --header-text-color: #FFF;
+                --card-bg-color: var(--grad-clr1);
+                --card-text-color: #FFF;
+                --card-border-radius: 10px;
+                --table-header-bg: #243B55;
+                --table-header-text: #FFF;
+                --table-row-hover-bg: #f1f1f1;
+                --table-border-color: #DDD;
+            }
+    
+            /* Body */
+            body {
+                height: 100vh;
+                background: var(--background-color);
+                font-family: 'Poppins', sans-serif;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background-color: #F3F7EC; /* Fallback for older browsers */
+            }
+    
+            /* Dashboard container */
+            .dashboard-container {
+                display: flex;
+                width: 100%;
+                height: 100%;
+                background-color: var(--content-bg-color);
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                overflow: auto; /* Enable scrolling if content exceeds */
+            }
+    
+            /* Sidebar */
+            .sidebar {
+                width: 250px; /* Set a fixed width for the sidebar */
+                min-width: 250px; /* Ensure minimum width is maintained */
+                background: var(--sidebar-color);
+                padding: 20px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: space-between;
+                position: sticky; /* Make the sidebar sticky */
+                top: 0; /* Stick to the top of the viewport */
+                height: 100vh; /* Set sidebar height to match viewport height */
+            }
+
+    
+            .sidebar h2 {
+                font-family: "Bebas Neue", sans-serif;
+                font-weight: 700;
+                font-size: 55px;
+                font-style: normal;
+                color: #FFF;
+            }
+    
+            .sidebar ul {
+                list-style: none;
+                width: 100%;
+                padding: 0;
+            }
+    
+            .sidebar ul li {
+                width: 100%;
+                margin: 10px 0;
+            }
+    
+            .sidebar ul li a {
+                color: var(--sidebar-item-color);
+                text-decoration: none;
+                padding: 10px 20px;
+                display: flex;
+                align-items: center;
+                border-radius: 5px;
+                transition: background 0.3s;
+            }
+    
+            .sidebar ul li a i {
+                margin-right: 10px;
+            }
+    
+            .sidebar ul li a:hover,
+            .sidebar ul li a.selected {
+                background: var(--sidebar-item-hover-color);
+                color: black;
+                border-right: 0.5rem solid #ff1900;
+            }
+    
+            /* Content */
+            .content {
+                flex-grow: 1;
+                display: flex;
+                flex-direction: column;
+            }
+    
+            header {
+                background: var(--header-bg-color);
+                padding: 20px;
+                color: var(--header-text-color);
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                border-radius: 10px 10px 0 0;
+            }
+    
+            header h1 {
+                font-size: 24px;
+            }
+    
+            header .logout {
+                color: var(--header-text-color);
+                text-decoration: none;
+                display: flex;
+                align-items: center;
+                transition: color 0.3s;
+            }
+    
+            header .logout i {
+                margin-right: 5px;
+            }
+    
+            header .logout:hover {
+                color: var(--sidebar-item-hover-color);
+            }
+    
+            /* Main */
+            main {
+                flex-grow: 1;
+                background: var(--content-bg-color);
+                padding: 20px;
+                border-radius: 0 0 10px 10px;
+            }
+    
+            /* Section */
+            .section {
+                display: none;
+            }
+    
+            .section.active {
+                display: block;
+            }
+    
+            /* Styled table */
+            .styled-table {
+                width: 100%;
+                margin-bottom: 10px;
+                font-size: 18px;
+                font-family: 'Poppins', sans-serif;
+                box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            }
+    
+            .styled-table thead tr {
+                background-color: var(--table-header-bg);
+                color: var(--table-header-text);
+                text-align: left;
+                font-weight: bold;
+            }
+    
+            .styled-table th,
+            .styled-table td {
+                border: 1px solid var(--table-border-color);
+                padding: 8px;
+            }
+    
+            .styled-table tbody tr {
+                border-bottom: 1px solid var(--table-border-color);
+            }
+    
+            .styled-table tbody tr:nth-of-type(even) {
+                background-color: #f3f3f3;
+            }
+    
+            .styled-table tbody tr:last-of-type {
+                border-bottom: 2px solid var(--table-header-bg);
+            }
+    
+            .styled-table tbody tr:hover {
+                background-color: var(--table-row-hover-bg);
+            }
+    
+            /* Modal */
+            .modal {
+                display: none;
+                position: fixed;
+                z-index: 1;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                overflow: auto;
+                background-color: rgba(0, 0, 0, 0.6);
+                transition: opacity 0.3s ease;
+            }
+    
+            .modal-content {
+                background-color: #fefefe;
+                margin: 5% auto;
+                padding: 20px;
+                border: 1px solid #888;
+                width: 80%;
+                max-width: 500px;
+                border-radius: 10px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+                animation: slide-in 0.5s ease-out;
+            }
+    
+            @keyframes slide-in {
+                from {
+                    transform: translateY(-50%);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateY(0);
+                    opacity: 1;
+                }
+            }
+    
+            .modal-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding-bottom: 10px;
+            }
+    
+            .modal-body {
+                text-align: center;
+            }
+    
+            .modal-body p {
+                margin: 10px 0;
+            }
+    
+            .modal-footer {
+                display: flex;
+                justify-content: center;
+                margin-top: 20px;
+            }
+    
+            .modal-footer button {
+                padding: 10px 20px;
+                border: none;
+                border-radius: 5px;
+                background-color: #ff1900;
+                color: white;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+            }
+    
+            .modal-footer button:hover {
+                background-color: #cc1500;
+            }
+    
+            .close {
+                background-color: transparent;
+                border: none;
+                font-size: 1.5rem;
+                cursor: pointer;
+            }
+    
+            .close:hover {
+                color: #ff1900;
+            }
+    
+            .modal-body input[type="number"] {
+                width: 50%;
+                padding: 10px;
+                margin: 10px 0;
+                box-sizing: border-box;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+                font-size: 1rem;
+                transition: border-color 0.3s ease;
+            }
+    
+            .modal-body input[type="number"]:focus {
+                border-color: #ff1900;
+                outline: none;
+            }
+        </style>
+        
+</head>
+<body>
+    <div class="dashboard-container">
+        <div class="sidebar">
+            <h2>Raise-Hub</h2>
+            <ul>
+                <li><a href="#" class="nav-item selected" data-target="foundations"><i class="fas fa-hand-holding-heart"></i> Foundations</a></li>
+                <li><a href="#" class="nav-item" data-target="requests"><i class="fas fa-paper-plane"></i> Requests</a></li>
+                <li><a href="#" class="nav-item" data-target="rejected-requests"><i class="fas fa-times-circle"></i> Rejected Requests</a></li>
+                <li><a href="/signout" class="logout"><i class="fas fa-sign-out-alt"></i> Signout</a></li>
+            </ul>
+        </div>
+        <div class="content">
+            <header style="margin: 20px;">
+                <h1>Admin Dashboard</h1>
+            </header>
+            <main>
+                <div id="foundations" class="section active">
+                    <h1>Foundations</h1>
+                    <table class="styled-table">
+                        <tr>
+                            <th>Foundation Name</th>
+                            <th>Cause</th>
+                            <th>Description</th>
+                            <th>Location</th>
+                            <th>Funds Raised</th>
+                            <th>Contact Details</th>
+                        </tr>
+                        <% foundations.forEach(foundation => { %>
+                            <tr>
+                                <td><%= foundation.foundationName %></td>
+                                <td><%= foundation.cause %></td>
+                                <td><%= foundation.description %></td>
+                                <td><%= foundation.location %></td>
+                                <td><%= foundation.fundsRaised %></td>
+                                <td><%= foundation.contactDetails %></td>
+                            </tr>
+                        <% }) %>
+                    </table>
+                </div>
+                <div id="requests" class="section">
+                    <h1>Requests</h1>
+                    <table class="styled-table">
+                        <thead>
+                            <tr>
+                                <th>Foundation Name</th>
+                                <th>Cause</th>
+                                <th>Description</th>
+                                <th>Location</th>
+                                <th>Contact Details</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% requests.forEach(request => { %>
+                                <tr>
+                                    <td><%= request.foundationName %></td>
+                                    <td><%= request.cause %></td>
+                                    <td><%= request.description %></td>
+                                    <td><%= request.location %></td>
+                                    <td><%= request.contactDetails %></td>
+                                    <td>
+                                        <form action="/admin/approveFoundation" method="POST"> <!-- Form for approve button -->
+                                            <input type="hidden" name="foundationId" value="<%= request._id %>"> <!-- Hidden field to send foundationId -->
+                                            <button type="submit" style="width: 55px; height: 25px; background-color: rgb(11, 220, 11); color: white; border: none; border-radius: 5px; cursor: pointer;">Approve</button>
+                                        </form>
+                                        <form action="/admin/rejectFoundation" method="POST"> <!-- Form for reject button -->
+                                            <input type="hidden" name="foundationId" value="<%= request._id %>"> <!-- Hidden field to send foundationId -->
+                                            <button type="submit" style="width: 55px; height: 25px; background-color: red; color: white;border: none; border-radius: 5px; cursor: pointer;">Reject</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            <% }) %>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="rejected-requests" class="section">
+                    <h1>Rejected Requests</h1>
+                    <table class="styled-table">
+                        <thead>
+                            <tr>
+                                <th>Foundation Name</th>
+                                <th>Cause</th>
+                                <th>Description</th>
+                                <th>Location</th>
+                                <th>Contact Details</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% rejected.forEach(rejectedRequest => { %>
+                                <tr>
+                                    <td><%= rejectedRequest.foundationName %></td>
+                                    <td><%= rejectedRequest.cause %></td>
+                                    <td><%= rejectedRequest.description %></td>
+                                    <td><%= rejectedRequest.location %></td>
+                                    <td><%= rejectedRequest.contactDetails %></td>
+                                </tr>
+                            <% }) %>
+                        </tbody>
+                    </table>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const navItems = document.querySelectorAll('.nav-item');
+            const sections = document.querySelectorAll('.section');
+
+            navItems.forEach(item => {
+                item.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector('#' + this.getAttribute('data-target'));
+
+                    navItems.forEach(nav => nav.classList.remove('selected'));
+                    this.classList.add('selected');
+
+                    sections.forEach(section => section.classList.remove('active'));
+                    target.classList.add('active');
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
